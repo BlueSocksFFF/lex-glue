@@ -89,12 +89,12 @@ def main():
             text_clf = Pipeline([
                 ('union', FeatureUnion([('context_tfidf',
                                 Pipeline([('extract_field', FunctionTransformer(lambda x: x['context'], validate=False)),
-                                          ('vect', CountVectorizer(stop_words=stopwords.words('english'),
+                                          ('vect', CountVectorizer(lowercase = False, stop_words=stopwords.words('english'),
                                                                    ngram_range=(1, 3), min_df=5, max_features=40000)),
                                           ('tfidf', TfidfTransformer())]))] +
                              [(f'option_{idx}_tfidf',
                                Pipeline([('extract_field', FunctionTransformer(lambda x: x[f'option_{idx}'], validate=False)),
-                                         ('vect', CountVectorizer(stop_words=stopwords.words('english'),
+                                         ('vect', CountVectorizer(lowercase = False, stop_words=stopwords.words('english'),
                                                                   ngram_range=(1, 3), min_df=5, max_features=40000)),
                                          ('tfidf', TfidfTransformer())]))
                               for idx in range(1, 6)]
@@ -102,7 +102,7 @@ def main():
                 ('clf', classifier)
             ])
         else:
-            text_clf = Pipeline([('vect', CountVectorizer(stop_words=stopwords.words('english'),
+            text_clf = Pipeline([('vect', CountVectorizer(lowercase = False, stop_words=stopwords.words('english'),
                                                           ngram_range=(1, 3), min_df=5)),
                                  ('tfidf', TfidfTransformer()),
                                  ('clf', classifier),
