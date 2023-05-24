@@ -1,4 +1,4 @@
-DATASET='eurlex'
+DATASET='ecthr_a'
 TASK_TYPE='multi_label'
 N_CLASSES=100
 
