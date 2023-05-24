@@ -1,5 +1,5 @@
 GPU_NUMBER=0
-MODEL_NAME='bert-base-uncased'
+MODEL_NAME='legal-bert-small-uncased'
 LOWER_CASE='True'
 BATCH_SIZE=8
 ACCUMULATION_STEPS=1

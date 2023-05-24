@@ -110,22 +110,30 @@ def main():
 
         # Fixate Validation Split
         split_index = [-1] * len(dataset['train']) + [0] * len(dataset['validation'])
+        # print(len(dataset['train']), len(dataset['validation']))
         val_split = PredefinedSplit(test_fold=split_index)
         gs_clf = GridSearchCV(text_clf, parameters, cv=val_split, n_jobs=32, verbose=4, refit = False)
 
         # Pre-process inputs, outputs
-        x_train = get_text(dataset['train'])
-        x_val = get_text(dataset['validation'])
-        x_train_val = pd.concat([x_train, x_val])
+        x_train = pd.DataFrame(get_text(dataset['train']))
+        x_val = pd.DataFrame(get_text(dataset['validation']))
+        x_train_val = pd.concat([x_train, x_val], axis=0).astype(str)
+        # print(x_train_val.shape)
+        print(x_train_val.dtypes)
         
         if config.task_type == 'multi_label':
             mlb = MultiLabelBinarizer(classes=range(n_classes))
+            # print(n_classes)
             mlb.fit(dataset['train']['labels'])
         else:
             mlb = None
         y_train = get_labels(dataset['train'], mlb)
+        y_train = pd.DataFrame(y_train)
         y_val = get_labels(dataset['validation'], mlb)
-        y_train_val = y_train + y_val
+        y_val = pd.DataFrame(y_val)
+        y_train_val = pd.concat([y_train, y_val], axis=0).astype(str)
+        # print(y_train_val.shape)
+        print(y_train_val.dtypes)
 
         # Train classifier
         gs_clf = gs_clf.fit(x_train_val, y_train_val)
