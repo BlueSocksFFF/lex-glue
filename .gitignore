@@ -133,3 +133,6 @@ dmypy.json
 
 # Log files
 logs/
+
+# Large files in models
+pretrained_models/
