@@ -1,6 +1,7 @@
 GPU_NUMBER=0
-MODEL_NAME='nlpaueb/legal-bert-small-uncased'
-LOWER_CASE='True'
+MODEL_NAME='pretrained_models/bert_mask_10.pth'
+CONFIG_NAME='bert-base-uncased'
+TOKENIZER_NAME='bert-base-uncased'
 BATCH_SIZE=2
 ACCUMULATION_STEPS=4
 TASK='ecthr_a'
