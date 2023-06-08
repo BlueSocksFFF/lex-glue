@@ -1,7 +1,7 @@
 GPU_NUMBER=0
 MODEL_NAME='pretrained_models/bert_mask_10.pth'
 CONFIG_NAME='bert-base-uncased'
-TOKENIZER_NAME='bert-base-uncased'
+TOKENIZER_NAME='tokenizer'
 LOWER_CASE='True'
 BATCH_SIZE=2
 ACCUMULATION_STEPS=4
